@@ -1,0 +1,197 @@
+All of the tests run below are strictly line coverage.
+======================================================
+
+Calling the function under test a string is returned and we expect the ... ok
+
+Name                            Stmts   Miss  Cover
+---------------------------------------------------
+coverage_talk.py                    0      0   100%
+coverage_talk/talk.py               0      0   100%
+coverage_talk/talk/example.py      10      4    60%
+---------------------------------------------------
+TOTAL                              10      4    60%
+----------------------------------------------------------------------
+Ran 1 test in 0.001s
+
+OK
+
+
+Calling the function under test a string is returned and we expect the ... ok
+Given a password defined in the list we expect the function to return ... ok
+
+Name                            Stmts   Miss  Cover
+---------------------------------------------------
+coverage_talk.py                    0      0   100%
+coverage_talk/talk.py               0      0   100%
+coverage_talk/talk/example.py      10      1    90%
+---------------------------------------------------
+TOTAL                              10      1    90%
+----------------------------------------------------------------------
+Ran 2 tests in 0.001s
+
+OK
+
+
+Calling the function under test a string is returned and we expect the ... ok
+Given a password not in the list we expect the function to return False. ... ok
+Given a password defined in the list we expect the function to return ... ok
+
+Name                            Stmts   Miss  Cover
+---------------------------------------------------
+coverage_talk.py                    0      0   100%
+coverage_talk/talk.py               0      0   100%
+coverage_talk/talk/example.py      10      0   100%
+---------------------------------------------------
+TOTAL                              10      0   100%
+----------------------------------------------------------------------
+Ran 3 tests in 0.002s
+
+OK
+
+
+Running with branch coverage for all the above tests
+====================================================
+
+ 31     @classmethod                                                                
+ 32     def contains_special_char(self, username):                                  
+ 33         """                                                                     
+ 34         A list of special characters is defined and the username cannot have    
+ 35         any defined when being validated. returns "invalid username" if special 
+ 36         character is found otherwise return "valid".                            
+ 37         """                                                                     
+ 38         special_chars = ('@', '#', '$', '%', '^', '&', '*', '(', ')')           
+ 39         for char in special_chars:                                              
+ 40             if char in username:                                                
+ 41                 return "invalid username"                                       
+ 42             else:                                                               
+ 43                 continue                                                        
+ 44         return "valid"                  
+
+
+Calling the function under test a string is returned and we expect the ... ok
+Given a password not in the list we expect the function to return False. ... ok
+Given a password defined in the list we expect the function to return ... ok
+
+Name                            Stmts   Miss Branch BrPart  Cover   Missing
+---------------------------------------------------------------------------
+coverage_talk.py                    0      0      0      0   100%
+coverage_talk/talk.py               0      0      0      0   100%
+coverage_talk/talk/example.py      17      6      6      0    57%   38-44
+---------------------------------------------------------------------------
+TOTAL                              17      6      6      0    57%
+----------------------------------------------------------------------
+Ran 3 tests in 0.001s
+
+OK
+
+Testing lines 38-44
+===================
+
+    def _callFUT(self, username):                                                  
+        """ Calls the function under test and returns the output. """              
+        instance = self._makeOne()                                                 
+        return instance.contains_special_char(username)                            
+                                                                                   
+    def test_contains_special_char(self):                                          
+        """                                                                        
+        Given a username with a speial character we expect the function to         
+        return "invalid username"                                                  
+        """                                                                        
+        invalid_username = "usern@me"                                              
+        expected_return = "invalid username"                                       
+        returned_message = self._callFUT(invalid_username)                         
+                                                                                   
+        self.assertEquals(expected_return, returned_message)
+
+Given a password not in the list we expect the function to return False. ... ok
+Given a password defined in the list we expect the function to return ... ok
+Given a username with a speial character we expect the function to ... ok
+Calling the function under test a string is returned and we expect the ... ok
+
+Name                            Stmts   Miss Branch BrPart  Cover   Missing
+---------------------------------------------------------------------------
+coverage_talk.py                    0      0      0      0   100%
+coverage_talk/talk.py               0      0      0      0   100%
+coverage_talk/talk/example.py      17      2      6      2    83%   43-44, 39->44, 40->43
+---------------------------------------------------------------------------
+TOTAL                              17      2      6      2    83%
+----------------------------------------------------------------------
+Ran 4 tests in 0.002s
+
+OK
+
+def test_username_does_not_contain_special_char(self):                         
+    """                                                                        
+    Given a username with no special character we expect the function to       
+    return "valid"                                                             
+    """                                                                        
+    invalid_username = "zerocool"                                              
+    expected_return = "valid"                                                  
+    returned_message = self._callFUT(invalid_username)                         
+                                                                                  
+    self.assertEquals(expected_return, returned_message)        
+
+
+Given a password not in the list we expect the function to return False. ... ok
+Given a password defined in the list we expect the function to return ... ok
+Given a username with a special character we expect the function to ... ok
+Given a username with no special character we expect the function to ... ok
+Calling the function under test a string is returned and we expect the ... ok
+
+Name                            Stmts   Miss Branch BrPart  Cover   Missing
+---------------------------------------------------------------------------
+coverage_talk.py                    0      0      0      0   100%
+coverage_talk/talk.py               0      0      0      0   100%
+coverage_talk/talk/example.py      17      1      6      1    91%   43, 40->43
+---------------------------------------------------------------------------
+TOTAL                              17      1      6      1    91%
+----------------------------------------------------------------------
+Ran 5 tests in 0.002s
+
+OK
+
+############################################################
+#		     Example 3                             #
+#		Peephole Optimization		           #
+############################################################
+Peephole optimization is not taking into account lines 43, 40-43.
+Looking at our code when nose is being run the else condition is being ignored during the initial run of nose. Nose ignores that line to speed up tests but coverage at this point is lying about not having covered those lines.
+There are two approaches to handles this sort of behavior.
+	- Using "# pragma: no cover" ignores the else condition along with the "continue" statement.
+	- Change the conditional. If the special character is not in the username continue else return "invalid username".
+		* The report will then return 100%.  
+
+31     @classmethod                                                                
+32     def contains_special_char(self, username):                                  
+33         """                                                                     
+34         A list of special characters is defined and the username cannot have    
+35         any defined when being validated. returns "invalid username" if special 
+36         character is found otherwise return "valid".                            
+37         """                                                                     
+38         special_chars = ('@', '#', '$', '%', '^', '&', '*', '(', ')')           
+39         for char in special_chars:                                              
+40             if char not in username:                                        
+41                 continue                                       
+42             else:                                                               
+43                 return "invalid username"                                                        
+44         return "valid"    
+
+Given a password not in the list we expect the function to return False. ... ok
+Given a password defined in the list we expect the function to return ... ok
+Given a username with a special character we expect the function to ... ok
+Given a username with no special character we expect the function to ... ok
+Calling the function under test a string is returned and we expect the ... ok
+
+Name                            Stmts   Miss Branch BrPart  Cover   Missing
+---------------------------------------------------------------------------
+coverage_talk.py                    0      0      0      0   100%
+coverage_talk/talk.py               0      0      0      0   100%
+coverage_talk/talk/example.py      17      0      6      0   100%
+---------------------------------------------------------------------------
+TOTAL                              17      0      6      0   100%
+----------------------------------------------------------------------
+Ran 5 tests in 0.002s
+
+OK
+        
+
