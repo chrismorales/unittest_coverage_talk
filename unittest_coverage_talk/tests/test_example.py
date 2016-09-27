@@ -12,8 +12,9 @@ class HelloWorldTest(unittest.TestCase):
 
     def test_hello_world_returns_hello_world_string(self):
         '''
-	Test that the string returned by hello_world method is equal to "Hello World"
-        '''
+        Test that the string returned by hello_world method is equal
+        to "Hello World
+        "'''
 
         expected_return = "Hello World"
         returned_value = self._callFUT()

@@ -15,8 +15,9 @@ body {
 
 .reveal pre code {
     overflow: visible;
-
+    max-height: none;
 }
+
 
 /*p {
     text-align: left;

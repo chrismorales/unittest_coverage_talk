@@ -71,10 +71,8 @@ How can we do this in Python
 Note: instead of nosetests you can use `pytest`
 
 
-Example
-=======
-
 Running nosetest testrunner with coverage
+=========================================
 
 .. image:: ../screenshots/example_one_test.png
 
@@ -127,8 +125,8 @@ Back to Coverage
 Now let's do go over example of code, tests and test coverage
 
 
-Coverage by Example: Hello World
-================================
+Hello World Function
+====================
 
 Here we have a classic "Hello World" example.
 
@@ -141,8 +139,10 @@ Here we have a classic "Hello World" example.
         return "Hello World"
 
 
-Coverage by Example: Hello World
-================================
+Hello World Function Test Cases
+===============================
+
+And here is it's only possible test case.
 
 .. code:: python
     :class: prettyprint lang-python
@@ -157,8 +157,11 @@ Coverage by Example: Hello World
             from unittest_coverage_talk.example import hello_world
             return hello_world()
 
-        def test_example_one_returns_hello_world_string(self):
-            '''Test that string is returned is equal to "Hello World" '''
+        def test_hello_world_returns_hello_world_string(self):
+            '''
+            Test that the string returned by hello_world method is equal
+            to "Hello World"
+            '''
 
             expected_return = "Hello World"
             returned_value = self._callFUT()
@@ -240,37 +243,58 @@ only ever imported and ran there across multiple tests for the test case.
             return hello_world()
 
 
+
 Structuring Tests: Expectation and Returns
 ==========================================
 
 1. Define expected return
 2. Call function under test
-3. Assert they are equal
+3. Assert the expected return and return of function under test are equal
 
 .. code:: python
     :class: prettyprint lang-python
 
-        def test_example_one_returns_hello_world_string(self):
-            '''Test that string is returned is equal to "Hello World" '''
+        def test_hello_world_returns_hello_world_string(self):
+            '''
+            Test that the string returned by hello_world method is equal
+            to "Hello World"
+            '''
 
             expected_return = "Hello World"
             returned_value = self._callFUT()
 
             self.assertEqual(expected_return, returned_value)
 
-Structuring Tests: Naming and Documenting the Test
-==================================================
+Structuring Tests: Documenting the Test
+=======================================
 
-* Documenting your test with what it does and expects will help you identify it
-  during test runner runs.
+* Documenting your test with what it does and expects
+* This will help you identify it during test runner runs
+* It will make your co-workers and FUTURE you happy as they won't have to guess
+  what you wanted the test to do 6 months from now
 
 .. code:: python
     :class: prettyprint lang-python
 
-        def test_example_one_returns_hello_world_string(self):
-            '''Test that string is returned is equal to "Hello World" '''
+        def test_hello_world_returns_hello_world_string(self):
+            '''
+            Test that the string returned by hello_world method is equal
+            to "Hello World"
+            '''
+
+.. image:: ../screenshots/test_example_1_with_docstring.png
+
+Structuring Tests: Naming the Test
+=======================================
+
+* Name the function explicitly as there are usually many similar but not
+  identical test cases.
+* Compare: **test_returns** and
 
 * Alternatively you can **pip install nose-ignore-docstring** package
+
+
+.. image:: ../screenshots/test_example_1_without_docstring.png
 
 
 Sources
