@@ -12,5 +12,6 @@ rst2html5 \
   --reveal-js \
   --pretty-print-code \
   --reveal-js-opts theme=beige \
+  --stylesheet-path=assets/custom.css \
   docs/index.rst \
 > output/reveal.html
