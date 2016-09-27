@@ -9,5 +9,4 @@ def get_number(odd_number=False):
         number = 1
     else:
         number = 2
-
     return number
