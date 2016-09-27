@@ -50,8 +50,8 @@ basic are the percent of program subroutines and the percent of program
 statements called during execution of the test suite.
 
 
-How do we usually know how much coverage we have
-================================================
+How can we do this in Python
+============================
 
 1. We write a lot of tests
 2. **pip install nose and coverage** packages
@@ -59,7 +59,7 @@ How do we usually know how much coverage we have
 4. testrunner/coverage MAGIC happens
 5. We see coverage percentage!
 
-Note: instead of nosetests you can use `pytest` with similar option
+Note: instead of nosetests you can use `pytest`
 
 
 Example
@@ -70,8 +70,28 @@ Running nosetest testrunner with coverage
 .. image:: ../screenshots/example_one_test.png
 
 
-What is the Coverage Package
-============================
+Sidebar: Why am I giving this talk
+==================================
+
+In the last few years, as I wrote code I often did it for projects that
+already had a test suite.
+
+As such I ran something like **nosetests** many times and have come to rely
+and trust it.
+
+
+Sidebar: However ...
+====================
+
+As I mentioned I dabbled in magic, so I naturally wondered what is this
+**MAGIC** is behind test runner.
+
+What's more, since I have long since learned that magic is an illusion I was
+now TERRIBLY concerned as to whether coverage tool does what I think it does
+
+
+About Coverage Package
+======================
 
 One of the golden standards is the `coverage` package written and maintained
 by "Ned Batchelder and others" (https://pypi.python.org/pypi/coverage)
@@ -79,15 +99,6 @@ by "Ned Batchelder and others" (https://pypi.python.org/pypi/coverage)
 It is a utility designed to work together with a test runner like nose
 or pytest and show you how much of your code ran when you ran your unittests
 
-
-Why did I want to give this talk
-================================
-
-As I mentioned I dabbled in magic, so I naturally wondered what is this
-**magic** is behind test runner.
-
-What's more, since I've long since learned that magic is an illusion I was
-now concerned that what coverage tool claims to do.
 
 
 Sources
