@@ -328,7 +328,7 @@ Commonly used metrics are
 Line Coverage
 =============
 
-This is one of the most common coverages metrics used. When the test runs, the
+This is one of the most common coverage metrics used. When the test runs, the
 lines that were executed are recorded. If all lines of the code ran it implies
 full coverage.
 
@@ -351,7 +351,7 @@ Try to never think of line coverage, think **STATEMENT COVERAGE** instead.
 Statement Coverage
 ==================
 
-This is the second most common coverages metrics used. When the test runs, the
+This is the second most common coverage metrics used. When the test runs, the
 statements that were executed are recorded. If all statements of the code ran
 it implies full coverage.
 
@@ -362,44 +362,109 @@ Statement Coverage: Get Number Example
 .. code:: python
     :class: prettyprint lang-python
 
-        def get_number(even_number=False)
+        def get_number(odd_number=False):
             """
-            Return 1 if even_number flag is False or 2 if even_number flag
-            is True
+            Return 1 if odd_number flag is True or 2 if odd_number flag is
+            False
             """
-            number = 1
-            if even_number is True:
-                number = 2
+            number = 2
+            if odd_number is True:
+                number = 1
 
-           return number
+            return number
 
 
-Line Coverage: Get Number Test
-==============================
+Statement Coverage: Get Number Test
+===================================
 
 .. code:: python
     :class: prettyprint lang-python
 
-    import unittest
+        import unittest
 
-    class GetNumberTest(unittest.TestCase):
+        class GetNumberTest(unittest.TestCase):
 
-        def _callFUT(self):
-            '''Imports & calls function under test & returns its output'''
+            def _callFUT(self, odd_number):
+                """Import get_number FUT, call it with passed odd_number"""
+                from unittest_coverage_talk.example2 import get_number
+                return get_number(odd_number)
 
-            from unittest_coverage_talk.example import hello_world
-            return hello_world()
+            def test_get_number_return_int_value_of_one(self):
+                """
+                Test if get_number returns 1 when odd_number=True is
+                passed in
+                """
+                test_odd_number = True
+                expected_number = 1
+                returned_number = self._callFUT(test_odd_number)
 
-        def test_hello_world_returns_hello_world_string(self):
-            '''
-            Test that the string returned by hello_world method is equal
-            to "Hello World"
-            '''
+                self.assertEqual(expected_number, returned_number)
 
-            expected_return = "Hello World"
-            returned_value = self._callFUT()
 
-            self.assertEqual(expected_return, returned_value)
+Statement Coverage: Get Number Test Coverage
+============================================
+
+So let's see what our coverage is now?
+
+.. image:: ../screenshots/example2_statement_coverage.png
+
+
+Statement Coverage: Celebration Hand Pump
+=========================================
+
+
+.. image:: ../screenshots/baby_fist_pump_statement.jpg
+
+
+Statement Coverage: Betrayal Once More
+======================================
+
+This coverage is of course a lie. If you look at the code or read the docstring
+for **get_number** you will see there are **two** possible outputs when
+you run the function (it returns 1 or 2).
+
+.. code:: python
+    :class: prettyprint lang-python
+
+        def get_number(odd_number=False):
+            """
+            Return 1 if odd_number flag is True or 2 if odd_number flag is
+            False
+            """
+            number = 2
+            if odd_number is True:
+                number = 1
+
+            return number
+
+And our current test only covers one of those case, when it return 1!
+
+
+Statement Coverage: Adding more tests
+=====================================
+
+Let's add a second test
+
+.. code:: python
+    :class: prettyprint lang-python
+
+        import unittest
+
+        class GetNumberTest(unittest.TestCase):
+
+            # ...
+
+            def test_get_number_return_int_value_of_two(self):
+                """
+                Test if get_number returns 2 when odd_number=False is
+                passed in
+                """
+                test_odd_number = False
+                expected_number = 2
+                returned_number = self._callFUT(test_odd_number)
+
+                self.assertEqual(expected_number, returned_number)
+
 
 
 
