@@ -315,6 +315,94 @@ You can also show the test function name and it's location if you
 .. image:: ../screenshots/test_example_1_without_docstring.png
 
 
+Let's talk types of Code coverages
+==================================
+
+Commonly used metrics are
+
+* Line coverage
+* Statement coverage
+* Branch coverage
+
+
+Line Coverage
+=============
+
+This is one of the most common coverages metrics used. When the test runs, the
+lines that were executed are recorded. If all lines of the code ran it implies
+full coverage.
+
+
+Line Coverage: The Betrayal
+===========================
+
+Line coverage is a *LIE!!!* for Python and most language that can run more then
+one statement on one line.
+
+
+.. code:: python
+    :class: prettyprint lang-python
+
+        print "this is"; print "a lie"
+
+Try to never think of line coverage, think **STATEMENT COVERAGE** instead.
+
+
+Statement Coverage
+==================
+
+This is the second most common coverages metrics used. When the test runs, the
+statements that were executed are recorded. If all statements of the code ran
+it implies full coverage.
+
+
+Statement Coverage: Get Number Example
+======================================
+
+.. code:: python
+    :class: prettyprint lang-python
+
+        def get_number(even_number=False)
+            """
+            Return 1 if even_number flag is False or 2 if even_number flag
+            is True
+            """
+            number = 1
+            if even_number is True:
+                number = 2
+
+           return number
+
+
+Line Coverage: Get Number Test
+==============================
+
+.. code:: python
+    :class: prettyprint lang-python
+
+    import unittest
+
+    class GetNumberTest(unittest.TestCase):
+
+        def _callFUT(self):
+            '''Imports & calls function under test & returns its output'''
+
+            from unittest_coverage_talk.example import hello_world
+            return hello_world()
+
+        def test_hello_world_returns_hello_world_string(self):
+            '''
+            Test that the string returned by hello_world method is equal
+            to "Hello World"
+            '''
+
+            expected_return = "Hello World"
+            returned_value = self._callFUT()
+
+            self.assertEqual(expected_return, returned_value)
+
+
+
 Sources
 =======
 
