@@ -5,7 +5,7 @@ import unittest
 class HelloWorldTest(unittest.TestCase):
 
     def _callFUT(self):
-            '''Imports, calls the function under test and returns the output'''
+        '''Imports, calls the function under test and returns the output'''
 
         from unittest_coverage_talk.example import hello_world
         return hello_world()
