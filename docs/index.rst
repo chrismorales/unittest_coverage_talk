@@ -132,7 +132,8 @@ Coverage by Example: Hello World
 
 Here we have a classic "Hello World" example.
 
-.. code-block:: python
+.. code:: python
+    :class: prettyprint lang-python
 
     def hello_world():
     '''Return a string of "Hello World" '''
@@ -143,7 +144,8 @@ Here we have a classic "Hello World" example.
 Coverage by Example: Hello World
 ================================
 
-.. code-block:: python
+.. code:: python
+    :class: prettyprint lang-python
 
     import unittest
 
