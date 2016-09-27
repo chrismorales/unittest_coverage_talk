@@ -15,6 +15,15 @@ About Presenter
 * Fun fact about me: **In my spare time I dabble in magic**
 
 
+What we will cover
+==================
+
+* What is coverage?
+* Different types of provable coverage such as line coverage,
+  statement coverage, branch coverage.
+* What approaches and questions to ask yourself when writing unit tests.
+
+
 Let's Start
 ===========
 
@@ -42,8 +51,8 @@ chance of containing undetected software bugs compared to a program with low
 code coverage.
 
 
-How is Code Coveage Usually Measured
-====================================
+How is Code Coverage Usually Measured
+=====================================
 
 Many different metrics can be used to calculate code coverage; some of the most
 basic are the percent of program subroutines and the percent of program
@@ -76,28 +85,82 @@ Sidebar: Why am I giving this talk
 In the last few years, as I wrote code I often did it for projects that
 already had a test suite.
 
-As such I ran something like **nosetests** many times and have come to rely
+As such, I ran something like **nosetests** many times and have come to rely
 and trust it.
 
 
 Sidebar: However ...
 ====================
 
-As I mentioned I dabbled in magic, so I naturally wondered what is this
-**MAGIC** is behind test runner.
+As I mentioned I dabbled in magic, so I naturally wondered what **MAGIC** is
+behind test runner.
 
 What's more, since I have long since learned that magic is an illusion I was
-now TERRIBLY concerned as to whether coverage tool does what I think it does
+now TERRIBLY concerned as to whether coverage tool does what I think it does.
 
 
-About Coverage Package
-======================
+Sidebar: Then I Had A Scary Thought ...
+=======================================
 
-One of the golden standards is the `coverage` package written and maintained
-by "Ned Batchelder and others" (https://pypi.python.org/pypi/coverage)
+What if all this time I've been wrong to rely on the coverage tool.
+
+.. image:: ../assets/smiley_scared.png
+
+
+Sidebar: About Coverage Package
+===============================
+
+Remember we pip installed the coverage package?
+
+The `coverage` package is a popular, stable tool that iis written and
+maintained by "Ned Batchelder and others"
 
 It is a utility designed to work together with a test runner like nose
-or pytest and show you how much of your code ran when you ran your unittests
+or pytest and show you the code coverage.
+
+Coverage documentation: https://coverage.readthedocs.io
+
+
+Back to Coverage
+================
+
+Now let's do go over example of code, tests and test coverage
+
+
+Coverage by Example: Hello World
+================================
+
+Here we have a classic "Hello World" example.
+
+.. code-block:: python
+
+    def hello_world():
+    '''Return a string of "Hello World" '''
+
+        return "Hello World"
+
+
+Coverage by Example: Hello World
+================================
+
+.. code-block:: python
+
+    import unittest
+
+    class HelloWorldTest(unittest.TestCase):
+
+        def _callFUT(self):
+            '''Calls the function under test and returns the output'''
+            from unittest_coverage_talk.example import hello_world
+            return hello_world()
+
+        def test_example_one_returns_expected_string(self):
+            '''Test that string is returned is equal to "Hello World" '''
+
+            expected_return = "Hello World"
+            returned_value = self._callFUT()
+
+            self.assertEqual(expected_return, returned_value)
 
 
 

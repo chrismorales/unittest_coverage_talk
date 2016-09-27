@@ -23,10 +23,6 @@ Building Slides
 
     rst2html5 --jquery --reveal-js --pretty-print-code docs/index.rst > output/reveal.html
 
-What I want you to get out of this talk?
-    - What is coverage?
-    - How coverage can be misleading.
-    - What approaches and questions to ask yourself when writing unit tests.
 
 
 

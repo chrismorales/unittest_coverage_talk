@@ -8,6 +8,7 @@ from setuptools import setup
 # install requires
 install_requires = [
     'rst2html5-tools',
+    'pygments',
     'nose',
     'coverage'
     ]

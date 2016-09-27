@@ -1,14 +1,6 @@
 # -*- coding: utf-8 -*-
 
-class ExampleOne(object):
-    """
-    Line Coverage
-    """
+def hello_world():
+    """ Return a string of "Hello World" """
 
-    def __init__(self):
-        pass
-
-    @staticmethod
-    def hello_world():
-        """ Returns a string of "Hello World" """
-        return "Hello World"
+    return "Hello World"
