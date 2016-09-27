@@ -10,7 +10,7 @@ class TestExampleFive(unittest.TestCase):
 
     def _makeOne(self):
         """ Imports the class and return an instance. """
-        from coverage_talk.talk.example_five import ExampleFive
+        from unittest_coverage_talk.talk.example_five import ExampleFive
         return ExampleFive()
 
     def _callFUT(self, username):

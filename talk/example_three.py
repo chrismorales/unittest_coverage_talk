@@ -16,6 +16,6 @@ class ExampleThree(object):
         for char in special_chars:
             if char in username:
                 return False
-            else:
+            else: # pragma: no cover
                 continue
         return True
