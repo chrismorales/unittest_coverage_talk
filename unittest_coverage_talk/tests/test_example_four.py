@@ -1,8 +1,9 @@
+# -*- coding: utf-8 -*-
+
 import unittest
 
 
-
-class TestExampleFive(unittest.TestCase):
+class TestExampleFour(unittest.TestCase):
     """
     Uses the BaseCoverageExample class which allows this test class to use the
     _makeOne method as a helper to get an instance for testing.
@@ -10,8 +11,8 @@ class TestExampleFive(unittest.TestCase):
 
     def _makeOne(self):
         """ Imports the class and return an instance. """
-        from unittest_coverage_talk.talk.example_five import ExampleFive
-        return ExampleFive()
+        from unittest_coverage_talk.example_four import ExampleFour
+        return ExampleFour()
 
     def _callFUT(self, username):
         """ Calls the function under test and returns the output. """

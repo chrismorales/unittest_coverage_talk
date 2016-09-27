@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 import unittest
 
 
@@ -9,7 +11,7 @@ class BaseCoverageExample(unittest.TestCase):
 
     def _makeOne(self):
         """ Imports the class and return an instance. """
-        from unittest_coverage_talk.talk.example import ExampleOne
+        from unittest_coverage_talk.example import ExampleOne
         return ExampleOne()
 
     def _callFUT(self):

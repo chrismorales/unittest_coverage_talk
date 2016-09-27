@@ -2,3 +2,5 @@
 .coverage
 coverage/
 nose
+/_env*
+/*.egg-info

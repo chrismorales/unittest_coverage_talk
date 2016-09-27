@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 class ExampleOne(object):
     """
     Line Coverage

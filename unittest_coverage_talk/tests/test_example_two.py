@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 import unittest
 
 
@@ -8,7 +10,7 @@ class TestExampleTwo(unittest.TestCase):
 
     def _makeOne(self):
         """ Import the class and return an instance. """
-        from unittest_coverage_talk.talk.example_two import ExampleTwo
+        from unittest_coverage_talk.example_two import ExampleTwo
         return ExampleTwo()
 
     def _callFUT(self, word):
