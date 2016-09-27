@@ -19,6 +19,9 @@ What we will cover
 ==================
 
 * What is coverage?
+* Code Coverage in Python
+* Structuring Your Tests
+
 * Different types of provable coverage such as line coverage,
   statement coverage, branch coverage.
 * What approaches and questions to ask yourself when writing unit tests.
@@ -59,8 +62,22 @@ basic are the percent of program subroutines and the percent of program
 statements called during execution of the test suite.
 
 
-How can we do this in Python
-============================
+Code coverage when developing in Python
+=======================================
+
+There are few tools out there, but we will only focus on one.
+
+The `coverage` package is a popular, stable tool that iis written and
+maintained by "Ned Batchelder and others"
+
+It is a tool designed to work together with a test runners like nose
+or pytest and show you the code coverage.
+
+Coverage documentation: https://coverage.readthedocs.io
+
+
+How it usually works
+====================
 
 1. We write a lot of tests
 2. **pip install nose and coverage** packages
@@ -68,11 +85,11 @@ How can we do this in Python
 4. testrunner/coverage MAGIC happens
 5. We see coverage percentage!
 
-Note: instead of nosetests you can use `pytest`
-
 
 Running nosetest testrunner with coverage
 =========================================
+
+Here is what coverage output looks like:
 
 .. image:: ../screenshots/example_one_test.png
 
@@ -105,24 +122,12 @@ What if all this time I've been wrong to rely on the coverage tool.
 .. image:: ../assets/smiley_scared.png
 
 
-Sidebar: About Coverage Package
-===============================
+Let's write a simple test
+=========================
 
-Remember we pip installed the coverage package?
+First we will need ALL OF JAVASCRIPT ... KIDDING!!!
 
-The `coverage` package is a popular, stable tool that iis written and
-maintained by "Ned Batchelder and others"
-
-It is a utility designed to work together with a test runner like nose
-or pytest and show you the code coverage.
-
-Coverage documentation: https://coverage.readthedocs.io
-
-
-Back to Coverage
-================
-
-Now let's do go over example of code, tests and test coverage
+.. image:: ../assets/cartoon_helloworld.png
 
 
 Hello World Function
@@ -182,7 +187,7 @@ Structuring Tests: Folders and Files
 ====================================
 
 1. Code is placed under the project folder
-2. Tests are place under under test subfolder in the project folder
+2. Tests are place under **test** subfolder in the project folder
 3. Test files are named by combining prefix of **test_** with the name of the
    file of the file being tested.
 
@@ -199,9 +204,10 @@ Tests in this presentation use the standard **unittest** module that comes
 with Python standard library.
 
 1. Import the unit test module
-2. Create a test case by making a class that inherits from unittest.TestCase.
+2. Create a test case by making a class that inherits from
+   **unittest.TestCase.**
 
-   This will tell the test runner (and coverage utility) which of my python
+   This will tell the test runner (and coverage tool) which of our python
    code is a test.
 
 .. code:: python
@@ -228,8 +234,8 @@ Structuring Tests: _callFUT
 **_callFUT** is a helper method is used to import and call the function being
 tested.
 
-Having function we test in one place ensures consistency since the method is
-only ever imported and ran there across multiple tests for the test case.
+Having the function we are testing in one place ensures consistency since the
+method is only ever imported and runs in _callFUT. It is a useful trick.
 
 .. code:: python
     :class: prettyprint lang-python
@@ -247,9 +253,9 @@ only ever imported and ran there across multiple tests for the test case.
 Structuring Tests: Expectation and Returns
 ==========================================
 
-1. Define expected return
-2. Call function under test
-3. Assert the expected return and return of function under test are equal
+1. Define expected return in **expected_return**
+2. Call function under test and assign it's return to **returned_value**
+3. Assert the **expected_return** and **returned_value** are equal
 
 .. code:: python
     :class: prettyprint lang-python
@@ -265,13 +271,12 @@ Structuring Tests: Expectation and Returns
 
             self.assertEqual(expected_return, returned_value)
 
+
 Structuring Tests: Documenting the Test
 =======================================
 
-* Documenting your test with what it does and expects
-* This will help you identify it during test runner runs
-* It will make your co-workers and FUTURE you happy as they won't have to guess
-  what you wanted the test to do 6 months from now
+* Document your test with what it does and expects
+* It will help FUTURE YOU and team mates avoid guessing
 
 .. code:: python
     :class: prettyprint lang-python
@@ -282,17 +287,30 @@ Structuring Tests: Documenting the Test
             to "Hello World"
             '''
 
+* It will also generate HUMAN readable test run output
+
 .. image:: ../screenshots/test_example_1_with_docstring.png
 
+
 Structuring Tests: Naming the Test
-=======================================
+==================================
 
 * Name the function explicitly as there are usually many similar but not
   identical test cases.
-* Compare: **test_returns** and
+* Bad name: **test_hello_world_returns**
+* Good name: **test_hello_world_returns_hello_world_string**
 
-* Alternatively you can **pip install nose-ignore-docstring** package
+.. code:: python
+    :class: prettyprint lang-python
 
+        def test_hello_world_returns_hello_world_string(self):
+          # ...
+
+Structuring Tests: Naming the Test (cont.)
+==========================================
+
+You can also show the test function name and it's location if you
+**pip install nose-ignore-docstring** package.
 
 .. image:: ../screenshots/test_example_1_without_docstring.png
 
