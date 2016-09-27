@@ -10,7 +10,7 @@ class HelloWorldTest(unittest.TestCase):
         from unittest_coverage_talk.example import hello_world
         return hello_world()
 
-    def test_example_one_returns_hello_world_string(self):
+    def test_hello_world_returns_hello_world_string(self):
         '''
 	Test that the string returned by hello_world method is equal to "Hello World"
         '''
