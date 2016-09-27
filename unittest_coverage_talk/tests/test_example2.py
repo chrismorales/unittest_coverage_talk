@@ -12,7 +12,7 @@ class GetNumberTest(unittest.TestCase):
 
     def test_get_number_return_int_value_of_one(self):
         """
-        Given a word in the list we expect the function to return True.
+        Test if get_number returns 1 when odd_number=True is passed in
         """
         test_odd_number = True
         expected_number = 1
