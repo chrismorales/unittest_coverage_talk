@@ -440,7 +440,7 @@ you run the function (it returns 1 or 2).
 And our current test only covers one of those case, when it return 1!
 
 
-Statement Coverage: Adding more tests
+Statement Coverage: Adding More Tests
 =====================================
 
 Let's add a second test
@@ -466,6 +466,72 @@ Let's add a second test
                 self.assertEqual(expected_number, returned_number)
 
 
+Statement Coverage: Can We Trust Noone?
+========================================
+
+.. image:: ../screenshots/example2_statement_coverage_2_tests_run.png
+
+We are still getting 100% coverage!? This time it is correct though as both
+cases are covered.
+
+However it tells us that coverage tricked us again.
+
+
+Statement Coverage: No Hope
+===========================
+
+Statement coverage is also a *LIE!!!* since code can be written in the way
+where 100% the statements have been executed but not all **branches** of your
+code ran.
+
+It can still be useful during development assuming you know it might trick you.
+
+
+Code Branches
+=============
+
+When a function has multiple outcomes what you are really saying there are
+multiple branches of code that are executed.
+
+In our case:
+
+.. code:: python
+    :class: prettyprint lang-python
+
+    if odd_number is True
+            / \
+           /   \
+         yes    no
+         /       \
+    return 1   return 2
+
+Maybe we can use that to our benefit?
+
+Code Branches: Code Rewrite
+===========================
+
+The cleanest way to address this so we can use statement coverage as useful
+tool is to rewrite our code. Let's try this
+
+
+.. code:: python
+    :class: prettyprint lang-python
+
+        def get_number(odd_number=False):
+            """
+            Return 1 if odd_number flag is True or 2 if odd_number flag is False
+            """
+
+            if odd_number is True:
+                number = 1
+            else:
+                number = 2
+
+            return number
+
+
+Branch Coverage: Dejavu
+=======================
 
 
 Sources
