@@ -136,7 +136,7 @@ Here we have a classic "Hello World" example.
     :class: prettyprint lang-python
 
     def hello_world():
-    '''Return a string of "Hello World" '''
+    '''Return a string of "Hello World"'''
 
         return "Hello World"
 
@@ -152,11 +152,12 @@ Coverage by Example: Hello World
     class HelloWorldTest(unittest.TestCase):
 
         def _callFUT(self):
-            '''Calls the function under test and returns the output'''
+            '''Imports & calls function under test & returns its output'''
+
             from unittest_coverage_talk.example import hello_world
             return hello_world()
 
-        def test_example_one_returns_expected_string(self):
+        def test_example_one_returns_hello_world_string(self):
             '''Test that string is returned is equal to "Hello World" '''
 
             expected_return = "Hello World"
@@ -164,6 +165,112 @@ Coverage by Example: Hello World
 
             self.assertEqual(expected_return, returned_value)
 
+
+Structuring Tests
+=================
+
+Warning!!! Opinions!!!
+
+I use a specific testing structure which I want take a few minutes to describe
+so we are all on the same page.
+
+
+Structuring Tests: Folders and Files
+====================================
+
+1. Code is placed under the project folder
+2. Tests are place under under test subfolder in the project folder
+3. Test files are named by combining prefix of **test_** with the name of the
+   file of the file being tested.
+
+.. image:: ../screenshots/tree_output_1.png
+
+This allows the test runner (nosetests) to know where to look for the tests
+
+
+
+Structuring Our Tests: Unittest Module
+======================================
+
+Tests in this presentation use the standard **unittest** module that comes
+with Python standard library.
+
+1. Import the unit test module
+2. Create a test case by making a class that inherits from unittest.TestCase.
+
+   This will tell the test runner (and coverage utility) which of my python
+   code is a test.
+
+.. code:: python
+    :class: prettyprint lang-python
+
+    import unittest
+
+    class HelloWorldTest(unittest.TestCase):
+        # ...
+
+
+Structuring Tests: Test Unit
+============================
+
+* Our test unit here is the function **hello_world**.
+* So our test case will only test **hello_world** outputs
+* The rule is: **One test case for one unit** for clarity and readability
+
+
+Structuring Tests: _callFUT
+===========================
+
+
+**_callFUT** is a helper method is used to import and call the function being
+tested.
+
+Having function we test in one place ensures consistency since the method is
+only ever imported and ran there across multiple tests for the test case.
+
+.. code:: python
+    :class: prettyprint lang-python
+
+    class HelloWorldTest(unittest.TestCase):
+
+        def _callFUT(self):
+            '''Imports & calls function under test & returns its output'''
+
+            from unittest_coverage_talk.example import hello_world
+            return hello_world()
+
+
+Structuring Tests: Expectation and Returns
+==========================================
+
+1. Define expected return
+2. Call function under test
+3. Assert they are equal
+
+.. code:: python
+    :class: prettyprint lang-python
+
+        def test_example_one_returns_hello_world_string(self):
+            '''Test that string is returned is equal to "Hello World" '''
+
+            expected_return = "Hello World"
+            returned_value = self._callFUT()
+
+            self.assertEqual(expected_return, returned_value)
+
+Structuring Tests: Naming and Documenting the Test
+==================================================
+
+* Documenting your test with what it does and expects will help you identify it
+  during test runner runs.
+
+.. code:: python
+    :class: prettyprint lang-python
+
+        def test_example_one_returns_hello_world_string(self):
+            '''Test that string is returned is equal to "Hello World" '''
+
+* Alternatively you can **pip install nose-ignore-docstring** package
 
 
 Sources
