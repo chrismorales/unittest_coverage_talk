@@ -21,10 +21,9 @@ What we will cover
 * What is coverage?
 * Code Coverage in Python
 * Structuring Your Tests
-
-* Different types of provable coverage such as line coverage,
-  statement coverage, branch coverage.
-* What approaches and questions to ask yourself when writing unit tests.
+* Line Coverage
+* Statement Coverage
+* Branch Coverage
 
 
 Let's Start
@@ -260,16 +259,16 @@ Structuring Tests: Expectation and Returns
 .. code:: python
     :class: prettyprint lang-python
 
-        def test_hello_world_returns_hello_world_string(self):
-            '''
-            Test that the string returned by hello_world method is equal
-            to "Hello World"
-            '''
+    def test_hello_world_returns_hello_world_string(self):
+        '''
+        Test that the string returned by hello_world method is equal
+        to "Hello World"
+        '''
 
-            expected_return = "Hello World"
-            returned_value = self._callFUT()
+        expected_return = "Hello World"
+        returned_value = self._callFUT()
 
-            self.assertEqual(expected_return, returned_value)
+        self.assertEqual(expected_return, returned_value)
 
 
 Structuring Tests: Documenting the Test
@@ -281,11 +280,11 @@ Structuring Tests: Documenting the Test
 .. code:: python
     :class: prettyprint lang-python
 
-        def test_hello_world_returns_hello_world_string(self):
-            '''
-            Test that the string returned by hello_world method is equal
-            to "Hello World"
-            '''
+    def test_hello_world_returns_hello_world_string(self):
+        '''
+        Test that the string returned by hello_world method is equal
+        to "Hello World"
+        '''
 
 * It will also generate HUMAN readable test run output
 
@@ -303,8 +302,8 @@ Structuring Tests: Naming the Test
 .. code:: python
     :class: prettyprint lang-python
 
-        def test_hello_world_returns_hello_world_string(self):
-          # ...
+    def test_hello_world_returns_hello_world_string(self):
+      # ...
 
 Structuring Tests: Naming the Test (cont.)
 ==========================================
@@ -343,7 +342,7 @@ one statement on one line.
 .. code:: python
     :class: prettyprint lang-python
 
-        print "this is"; print "a lie"
+    print "this is"; print "a lie"
 
 Try to never think of line coverage, think **STATEMENT COVERAGE** instead.
 
@@ -362,16 +361,16 @@ Statement Coverage: Get Number Example
 .. code:: python
     :class: prettyprint lang-python
 
-        def get_number(odd_number=False):
-            """
-            Return 1 if odd_number flag is True or 2 if odd_number flag is
-            False
-            """
-            number = 2
-            if odd_number is True:
-                number = 1
+    def get_number(odd_number=False):
+        """
+        Return 1 if odd_number flag is True or 2 if odd_number flag is
+        False
+        """
+        number = 2
+        if odd_number is True:
+            number = 1
 
-            return number
+        return number
 
 
 Statement Coverage: Get Number Test
@@ -380,25 +379,25 @@ Statement Coverage: Get Number Test
 .. code:: python
     :class: prettyprint lang-python
 
-        import unittest
+    import unittest
 
-        class GetNumberTest(unittest.TestCase):
+    class GetNumberTest(unittest.TestCase):
 
-            def _callFUT(self, odd_number):
-                """Import get_number FUT, call it with passed odd_number"""
-                from unittest_coverage_talk.example2 import get_number
-                return get_number(odd_number)
+        def _callFUT(self, odd_number):
+            """Import get_number FUT, call it with passed odd_number"""
+            from unittest_coverage_talk.example2 import get_number
+            return get_number(odd_number)
 
-            def test_get_number_return_int_value_of_one(self):
-                """
-                Test if get_number returns 1 when odd_number=True is
-                passed in
-                """
-                test_odd_number = True
-                expected_number = 1
-                returned_number = self._callFUT(test_odd_number)
+        def test_get_number_return_int_value_of_one(self):
+            """
+            Test if get_number returns 1 when odd_number=True is
+            passed in
+            """
+            test_odd_number = True
+            expected_number = 1
+            returned_number = self._callFUT(test_odd_number)
 
-                self.assertEqual(expected_number, returned_number)
+            self.assertEqual(expected_number, returned_number)
 
 
 Statement Coverage: Get Number Test Coverage
@@ -426,16 +425,16 @@ you run the function (it returns 1 or 2).
 .. code:: python
     :class: prettyprint lang-python
 
-        def get_number(odd_number=False):
-            """
-            Return 1 if odd_number flag is True or 2 if odd_number flag is
-            False
-            """
-            number = 2
-            if odd_number is True:
-                number = 1
+    def get_number(odd_number=False):
+        """
+        Return 1 if odd_number flag is True or 2 if odd_number flag is
+        False
+        """
+        number = 2
+        if odd_number is True:
+            number = 1
 
-            return number
+        return number
 
 And our current test only covers one of those case, when it return 1!
 
@@ -448,22 +447,22 @@ Let's add a second test
 .. code:: python
     :class: prettyprint lang-python
 
-        import unittest
+    import unittest
 
-        class GetNumberTest(unittest.TestCase):
+    class GetNumberTest(unittest.TestCase):
 
-            # ...
+        # ...
 
-            def test_get_number_return_int_value_of_two(self):
-                """
-                Test if get_number returns 2 when odd_number=False is
-                passed in
-                """
-                test_odd_number = False
-                expected_number = 2
-                returned_number = self._callFUT(test_odd_number)
+        def test_get_number_return_int_value_of_two(self):
+            """
+            Test if get_number returns 2 when odd_number=False is
+            passed in
+            """
+            test_odd_number = False
+            expected_number = 2
+            returned_number = self._callFUT(test_odd_number)
 
-                self.assertEqual(expected_number, returned_number)
+            self.assertEqual(expected_number, returned_number)
 
 
 Statement Coverage: Can We Trust Noone?
@@ -491,7 +490,7 @@ Code Branches
 =============
 
 When a function has multiple outcomes what you are really saying there are
-multiple branches of code that are executed.
+multiple branches of code that are executed which return different results.
 
 In our case:
 
@@ -507,31 +506,190 @@ In our case:
 
 Maybe we can use that to our benefit?
 
+
 Code Branches: Code Rewrite
 ===========================
 
-The cleanest way to address this so we can use statement coverage as useful
-tool is to rewrite our code. Let's try this
+Maybe we can still use statement coverage if we somehow could NOT run the
+statements that are not covered by the first test. Let's try this:
 
 
 .. code:: python
     :class: prettyprint lang-python
 
-        def get_number(odd_number=False):
+    def get_number(odd_number=False):
+        """
+        Return 1 if odd_number flag is True or 2 if odd_number flag is False
+        """
+
+        if odd_number is True:
+            number = 1
+        else:
+            number = 2
+
+        return number
+
+
+Statement Coverage: A New Hope
+==============================
+
+As you can see now coverage shows up that we missed **1 statement** and that it
+is missing on **line 11**.
+
+.. image:: ../screenshots/example3_branch_coverage_code_refactor.png
+
+This is line 11:
+
+.. code:: python
+    :class: prettyprint lang-python
+
+    else:
+        number = 2
+
+Statement Coverage: New Hope Explained
+======================================
+
+That "else block" in the previous iteration of our code was handled
+**implicitly** be setting *number = 2* before the if statement.
+
+So the statement **ALWAYS** ran and was reported as such by coverage.
+
+.. code:: python
+    :class: prettyprint lang-python
+
+    def get_number(odd_number=False):
+        """
+        Return 1 if odd_number flag is True or 2 if odd_number flag is False
+        """
+        number = 2
+        if odd_number is True:
+            number = 1
+
+        return number
+
+
+Code Refactors Like This Are Highly Recommended
+===============================================
+
+What we did there is refactor the code to have **EXPLICIT** code branches.
+
+   **This is a highly recommended solution.**
+
+Do not be put off by "well, this is more code". What you really have there is
+**MORE READABLE CODE**.
+
+
+Sidebar: --cover-erase
+======================
+
+Quick note. You might have noticed that we added **--cover-erase** argument
+to our **nosetests** command.
+
+This is necessary because the coverage tool caches coverage results in a file
+called *.coverage* for performance. However, it does not always know when to
+invalidate this cache.
+
+We strongly suggest using **--cover-erase** options for all your runs.
+
+
+Branch Coverage
+===============
+
+Branch coverage is yet another coverage metric. It is much more accurate since
+it works by calculating possible branches of code and recording those that ran
+and those that did not.
+
+You can get branch coverage from statement coverage alone if you write your
+code in the explicit manner like we did above.
+
+
+Branch Coverage: Return of The Coverage Tool
+============================================
+
+Calculating possible code branches is not always easy but the coverage tool
+does a pretty good job. Let's run tests for example2 with only **ONE** test:
+
+.. code:: python
+    :class: prettyprint lang-python
+
+    import unittest
+
+    class GetNumberTest(unittest.TestCase):
+
+        def _callFUT(self, odd_number):
+            """Import get_number FUT, call it with passed odd_number"""
+            from unittest_coverage_talk.example2 import get_number
+            return get_number(odd_number)
+
+        def test_get_number_return_int_value_of_one(self):
             """
-            Return 1 if odd_number flag is True or 2 if odd_number flag is False
+            Test if get_number returns 1 when odd_number=True is
+            passed in
             """
+            test_odd_number = True
+            expected_number = 1
+            returned_number = self._callFUT(test_odd_number)
 
-            if odd_number is True:
-                number = 1
-            else:
-                number = 2
+            self.assertEqual(expected_number, returned_number)
 
-            return number
+Branch Coverage: Comparison
+===========================
+
+Let's also do a compassion of coverage report with and without branch coverage.
+Below test exact same code with and without **--cover-branches** argument.
 
 
-Branch Coverage: Dejavu
-=======================
+Branch Coverage: Comparison, No Branch Coverage
+===============================================
+
+So, without branch coverage:
+
+.. image:: ../screenshots/example2_statement_coverage.png
+
+
+Branch Coverage: Comparison, Branch Coverage
+============================================
+
+And with branch coverage:
+
+.. image:: ../screenshots/example2_branch_coverage.png
+
+This shows the missing branch coverage and the approximate location of where.
+
+
+Branch Coverage: Branch Coverage, The Code
+==========================================
+
+Coverage tool also has an ability to generate an html report which will
+show you which lines have partial coverage if you use **--cover-html**
+argument.
+
+.. image:: ../screenshots/example2_branch_coverage_html_command_run.png
+
+.. image:: ../screenshots/example2_branch_coverage_html_report.png
+
+
+Branch Coverage: Branch Coverage, The Explicit Code
+===================================================
+
+Let's also see what the report looks like for the **refactored** version of the
+code where only 1 test runs.
+
+.. image:: ../screenshots/example3_branch_coverage_html_report.png
+
+It shows us the same missing partial, but not the missing statement
+
+
+Branch Coverage: Branch Coverage, We Love you
+=============================================
+
+As you can see branch coverage is the most comprehensive coverage we have can
+use. The coverage will allow you to catch most of those conditions and has
+useful reports to help you.
+
+Still we strongly recommend that you refactor you code to have be explicit
+enough that using statement coverage you can get full coverage.
+
 
 
 Sources
