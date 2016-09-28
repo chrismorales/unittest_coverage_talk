@@ -66,7 +66,7 @@ Code coverage when developing in Python
 
 There are few tools out there, but we will only focus on one.
 
-The `coverage` package is a popular, stable tool that iis written and
+The `coverage` package is a popular, stable tool that is written and
 maintained by "Ned Batchelder and others"
 
 It is a tool designed to work together with a test runners like nose
@@ -96,20 +96,20 @@ Here is what coverage output looks like:
 Sidebar: Why am I giving this talk
 ==================================
 
-In the last few years, as I wrote code I often did it for projects that
+In the last few years, as we wrote code we often did it for projects that
 already had a test suite.
 
-As such, I ran something like **nosetests** many times and have come to rely
+As such, we ran something like **nosetests** many times and have come to rely
 and trust it.
 
 
 Sidebar: However ...
 ====================
 
-As I mentioned I dabbled in magic, so I naturally wondered what **MAGIC** is
+As I mentioned I dabbled in magic, so we naturally wondered what **MAGIC** is
 behind test runner.
 
-What's more, since I have long since learned that magic is an illusion I was
+What's more, since I have long since learned that magic is an illusion we were
 now TERRIBLY concerned as to whether coverage tool does what I think it does.
 
 
@@ -178,8 +178,8 @@ Structuring Tests
 
 Warning!!! Opinions!!!
 
-I use a specific testing structure which I want take a few minutes to describe
-so we are all on the same page.
+We use a specific testing structure which we want take a few minutes to
+describe so we are all on the same page.
 
 
 Structuring Tests: Folders and Files
@@ -486,8 +486,8 @@ code ran.
 It can still be useful during development assuming you know it might trick you.
 
 
-Code Branches
-=============
+We Mentioned Code Branches
+==========================
 
 When a function has multiple outcomes what you are really saying there are
 multiple branches of code that are executed which return different results.
@@ -691,8 +691,20 @@ Still we strongly recommend that you refactor you code to have be explicit
 enough that using statement coverage you can get full coverage.
 
 
+Branch Coverage: It Still Lies
+==============================
 
-Sources
-=======
+Despite the wonderful work done by coverage tool team the branch coverage
+analysis done by the coverage is still incomplete. Something called
+**peep hole** optimizations can still mess up your coverage.
 
-Wikipedia: https://en.wikipedia.org/wiki/Code_coverage
+Since the topic is rather involved we would rather try to show and explain it
+one on one to those who are interested. But you can read all about it here:
+
+https://bitbucket.org/ned/coveragepy/issues/198/continue-marked-as-not-covered
+
+
+Questions
+=========
+
+?
