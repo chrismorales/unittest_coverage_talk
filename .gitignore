@@ -4,3 +4,4 @@ coverage/
 nose
 /_env*
 /*.egg-info
+/cover
